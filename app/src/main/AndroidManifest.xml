@@ -21,9 +21,9 @@
         <activity android:name=".Alumno_Cursos"></activity>
         <activity android:name=".Alumno_Horario"></activity>
         <activity android:name=".Alumno_Notas"></activity>
-        <activity android:name=".Docente"></activity>
-        <activity android:name=".Docente_Cursos"></activity>
-        <activity android:name=".Docente_Horario"></activity>
-        <activity android:name=".Lista_Alumnos"></activity>
+        <activity android:name=".Docente" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Docente_Cursos" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Docente_Horario" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Lista_Alumnos" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 </manifest>

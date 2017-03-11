@@ -29,28 +29,6 @@ public class Docente extends AppCompatActivity {
         setContentView(R.layout.activity_docente);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         initNavigationDrawer();
-/*
-        btnHorario = (Button) findViewById(R.id.btnHorario);
-        btnCursos = (Button) findViewById(R.id.btnCursos);
-        btnSalir = (Button) findViewById(R.id.btnSalir);
-        btnHorario.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent objIntent = new Intent(Docente.this, Docente_Horario.class);
-                startActivity(objIntent);
-            }
-        });
-        btnCursos.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent objIntent = new Intent(Docente.this, Docente_Cursos.class);
-                startActivity(objIntent);
-            }
-        });
-        btnSalir.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent objIntent = new Intent(Docente.this, MainActivity.class);
-                startActivity(objIntent);
-            }
-        }); */
     }
 
     public void initNavigationDrawer() {
@@ -68,10 +46,14 @@ public class Docente extends AppCompatActivity {
                         break;
                     case R.id.cursos:
                         objIntent = new Intent(Docente.this, Docente_Cursos.class);
+                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
+                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
                         startActivity(objIntent);
                         break;
                     case R.id.horario:
                         objIntent = new Intent(Docente.this, Docente_Horario.class);
+                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
+                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
                         startActivity(objIntent);
                         break;
                     case R.id.logout:
