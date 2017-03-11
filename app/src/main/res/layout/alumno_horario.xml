@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/alumno"
+        android:id="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimaryDark" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:entries="@array/horario"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorAccent" />
+
+    <TextView
+        android:text="Sabado 11 Febrero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:layout_marginTop="14dp"
+        android:textSize="24sp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorLetraButton" />
+
+    <ListView
+        android:layout_width="285dp"
+        android:layout_height="279dp"
+        android:entries="@array/horario_curso"
+        android:layout_marginStart="164dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="164dp" />
+</RelativeLayout>

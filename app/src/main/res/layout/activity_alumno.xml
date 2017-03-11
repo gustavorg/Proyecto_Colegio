@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/colorPrimaryDark">
+
+    <ImageView
+        android:layout_width="395dp"
+        android:layout_height="185dp"
+        app:srcCompat="@drawable/alumno"
+        android:id="@+id/imageView"
+        android:layout_weight="0.14"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/colorLetraButton" />
+
+    <Button
+        android:text="Horario"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnHorario"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorLetraButton"
+        android:layout_below="@+id/imageView"
+        android:layout_alignLeft="@+id/btnSalir"
+        android:layout_alignStart="@+id/btnSalir"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:text="Cursos"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCursos"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorLetraButton"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/btnHorario"
+        android:layout_alignLeft="@+id/btnHorario"
+        android:layout_alignStart="@+id/btnHorario" />
+
+    <Button
+        android:text="Notas"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnNotas"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorLetraButton"
+        android:layout_marginTop="27dp"
+        android:layout_below="@+id/btnCursos"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:text="Salir"
+        android:layout_width="294dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSalir"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorLetraButton"
+        android:layout_below="@+id/btnNotas"
+        android:layout_alignLeft="@+id/btnNotas"
+        android:layout_alignStart="@+id/btnNotas"
+        android:layout_marginTop="20dp" />
+
+</RelativeLayout>

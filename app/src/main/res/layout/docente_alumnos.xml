@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <Button
+        android:text="Nueva Nota"
+        android:layout_width="188dp"
+        android:layout_height="61dp"
+        android:id="@+id/button" />
+
+    <TextView
+        android:text="Lista de Alumnos"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:id="@+id/textView5"
+        android:textSize="24sp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="211dp"
+        android:entries="@array/Docente_Alumno" />
+
+</LinearLayout>

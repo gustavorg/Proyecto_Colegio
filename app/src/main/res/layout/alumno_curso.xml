@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="@color/colorPrimaryDark">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="177dp"
+        app:srcCompat="@drawable/alumno"
+        android:id="@+id/imageView3"
+        android:layout_weight="0.04"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:text="Lista de Cursos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:layout_weight="0.04"
+        android:fontFamily="sans-serif"
+        android:textSize="24sp"
+        android:textColor="@color/colorLetraButton" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:entries="@array/cursos"
+        android:background="@color/colorAccent"
+        android:layout_height="220dp"
+        android:layout_weight="1.05" />
+</LinearLayout>

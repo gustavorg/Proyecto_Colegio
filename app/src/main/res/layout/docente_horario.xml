@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/docente"
+        android:id="@+id/imageView6"
+        android:background="@color/colorPrimaryDark" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/horario_curso"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="203dp"
+        android:layout_below="@+id/textView3" />
+
+    <ListView
+        android:layout_height="wrap_content"
+        android:entries="@array/horario"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="Sabado 11 Febrero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView3"
+        android:textSize="24sp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/imageView6"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="34dp"
+        android:textColor="@color/colorLetraButton" />
+
+</RelativeLayout>

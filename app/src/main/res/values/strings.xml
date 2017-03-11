@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Intranet SFA</string>
+    <string name="action_settings">Cerrar Sesion</string>
+    <string-array name="horario_curso">
+        <item>Matemáticas</item>
+        <item>Personal Social</item>
+        <item>Comunicación Integral</item>
+        <item>Educación Física</item>
+    </string-array>
+    <string-array name="horario">
+        <item>8:00 a.m - 9:15 a.m</item>
+        <item>9:30 a.m - 11:15 a.m</item>
+        <item>1:00 p.m - 2:30 p.m</item>
+        <item>4:30 p.m - 8:15 p.m</item>
+    </string-array>
+    <string-array name="cursos">
+        <item>Matemáticas</item>
+        <item>Personal Social</item>
+        <item>Comunicación Integral</item>
+        <item>Educación Fisica</item>
+        <item>Taller</item>
+    </string-array>
+    <string-array name="Matematicas">
+        <item>Bimestre 1 : 17</item>
+        <item>Bimestre 2 : --</item>
+        <item>Bimestre 3 : --</item>
+        <item>Bimestre 4 : --</item>
+    </string-array>
+    <string-array name="Taller">
+        <item>Bimestre 1 : 14</item>
+        <item>Bimestre 2 : --</item>
+        <item>Bimestre 3 : --</item>
+        <item>Bimestre 4 : --</item>
+    </string-array>
+    <string-array name="PersonalSocial">
+        <item>Bimestre 1 : 20</item>
+        <item>Bimestre 2 : --</item>
+        <item>Bimestre 3 : --</item>
+        <item>Bimestre 4 : --</item>
+    </string-array>
+
+    <string-array name="Docente_Alumno">
+        <item>MORALES SEGOVIA, Lucho</item>
+        <item>RIVERO GARCIA, Gustavo</item>
+        <item>----------------------</item>
+        <item>----------------------</item>
+    </string-array>
+
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+</resources>
