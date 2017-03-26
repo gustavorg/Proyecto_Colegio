@@ -20,23 +20,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
+import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
 
 import static android.content.ContentValues.TAG;
 
-public class DocenteCursoDAO {
-    DocenteCursoBean result;
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController";
+public class DocenteCursoSeccionDAO {
+    DocenteCursoSeccionBean result;
+    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/detailCourse2";
 
-    public DocenteCursoBean MostrarCursos(String codigo)
+    public DocenteCursoSeccionBean CursosporSeccion(DocenteCursoBean objdocenteCursoBean)
     {
         InputStream is = null;
-        String linea;
+        String linea,txtcodigo,txtnom;
 
         try
         {
+            txtcodigo = objdocenteCursoBean.getCodigo();
+            txtnom = objdocenteCursoBean.getNombre_Curso();
+
             List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 
-            parametros.add(new BasicNameValuePair("TXTCODIGO",codigo));
+            parametros.add(new BasicNameValuePair("CODIGO",txtcodigo));
+            parametros.add(new BasicNameValuePair("NOMCUR",txtnom));
 
             HttpClient cn = new DefaultHttpClient();
             HttpPost post = new HttpPost(ruta);
@@ -59,11 +64,17 @@ public class DocenteCursoDAO {
 
             JSONArray json = new JSONArray(trama.toString());
 
-            result = new DocenteCursoBean();
+            result = new DocenteCursoSeccionBean();
 
             for (int i = 0; i < json.length(); i++) {
                 JSONObject jsonobject = json.getJSONObject(i);
-                result.setNombre_Curso(jsonobject.getString("Des_Nombre"));
+                result.setNom_curso(jsonobject.getString("Des_Nombre"));
+                result.setDia(jsonobject.getString("Dia"));
+                result.setGrado(jsonobject.getString("Grado"));
+                result.setSeccion(jsonobject.getString("Seccion"));
+                result.setTurno(jsonobject.getString("Turno"));
+                result.setHora_inicio(jsonobject.getString("Hora_Inicio"));
+                result.setHora_fin(jsonobject.getString("Hora_Fin"));
             }
 
         } catch (Exception e)

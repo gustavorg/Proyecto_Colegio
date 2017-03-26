@@ -29,7 +29,7 @@
 
             </android.support.design.widget.AppBarLayout>
 
-            <include layout="@layout/content_main_docente_cursos" />
+            <include layout="@layout/content_main_docente_curso" />
 
         </android.support.design.widget.CoordinatorLayout>
 

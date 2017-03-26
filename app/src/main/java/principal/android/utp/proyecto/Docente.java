@@ -4,15 +4,20 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Button;
+
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 /**
  * Created by GRLIMA on 11/02/2017.
@@ -22,14 +27,32 @@ public class Docente extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
+    CarouselView carouselView;
 
+    int[] sampleImages = {R.drawable.carrousel1, R.drawable.carrousel2, R.drawable.carrousel3, R.drawable.carrousel4};
+  //  ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_docente);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         initNavigationDrawer();
+
+        carouselView = (CarouselView) findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+
+        carouselView.setImageListener(imageListener);
+   /*     mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
+        AndroidImageAdapter adapterView = new AndroidImageAdapter(this);
+        mViewPager.setAdapter(adapterView);*/
     }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
 
     public void initNavigationDrawer() {
 

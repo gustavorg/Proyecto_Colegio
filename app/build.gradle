@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "principal.android.utp.proyecto"
-        minSdkVersion 9
+        minSdkVersion 14
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -25,5 +25,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-
+    compile 'com.synnapps:carouselview:0.0.10'
 }

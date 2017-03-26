@@ -23,6 +23,7 @@
         <activity android:name=".Alumno_Notas"></activity>
         <activity android:name=".Docente" android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Docente_Cursos" android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Docente_Curso_Seccion" android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Docente_Horario" android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Lista_Alumnos" android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
