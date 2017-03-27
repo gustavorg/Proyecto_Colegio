@@ -25,9 +25,10 @@ import static android.content.ContentValues.TAG;
 
 public class DocenteCursoDAO {
     DocenteCursoBean result;
+    ArrayList<DocenteCursoBean> listado = new ArrayList<DocenteCursoBean>();
     String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController";
 
-    public DocenteCursoBean MostrarCursos(String codigo)
+    public ArrayList<DocenteCursoBean> MostrarCursos(String codigo)
     {
         InputStream is = null;
         String linea;
@@ -58,12 +59,11 @@ public class DocenteCursoDAO {
             is.close();
 
             JSONArray json = new JSONArray(trama.toString());
-
-            result = new DocenteCursoBean();
-
             for (int i = 0; i < json.length(); i++) {
+                result = new DocenteCursoBean();
                 JSONObject jsonobject = json.getJSONObject(i);
                 result.setNombre_Curso(jsonobject.getString("Des_Nombre"));
+                listado.add(result);
             }
 
         } catch (Exception e)
@@ -72,6 +72,6 @@ public class DocenteCursoDAO {
             result = null;
 
         }
-        return result;
+        return listado;
     }
 }

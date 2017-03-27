@@ -15,13 +15,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
-import principal.android.utp.proyecto.dao.Docente.DocenteCursoDAO;
 import principal.android.utp.proyecto.dao.Docente.DocenteCursoSeccionDAO;
 
 /**
@@ -32,13 +32,14 @@ public class Docente_Curso_Seccion extends AppCompatActivity {
     ListView lv;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private String[] cursos;
     String nombre_curso,seccion,grado,horainicio,horafin,turno,dia;
     ArrayAdapter<String> adaptador;
+    ArrayList<String> listado_secciones;
+    ArrayList<DocenteCursoSeccionBean> listado;
     DocenteCursoBean objDocenteCursoBean;
     DocenteCursoSeccionBean objDocenteCursoSeccionBean;
     DocenteCursoSeccionDAO objDocenteCursoSeccionDAO;
-
+    List<String> list;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.docente_curso_seccion);
@@ -52,10 +53,22 @@ public class Docente_Curso_Seccion extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-                if (position == 1) {
-                    Intent objIntent = new Intent(Docente_Curso_Seccion.this, Lista_Alumnos.class);
-                    startActivity(objIntent);
+                Intent objIntent = new Intent(Docente_Curso_Seccion.this, Lista_Alumnos.class);
+                objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
+                objIntent.putExtra("nombre", getIntent().getStringExtra("nombre"));
+                objIntent.putExtra("curso", getIntent().getStringExtra("nomcurso"));
+                objIntent.putExtra("horaI", listado.get(position).getHora_inicio());
+                objIntent.putExtra("horaF", listado.get(position).getHora_fin());
+                objIntent.putExtra("grado", listado.get(position).getGrado());
+                objIntent.putExtra("seccion", listado.get(position).getSeccion());
+                startActivity(objIntent);
+                finish();
+
+                if(listado_secciones.get(position).toString() == ""){
+                    Toast.makeText(getApplicationContext(), "No tiene Alumnos en esta Seccion",
+                            Toast.LENGTH_LONG).show();
                 }
+
 
             }
         });
@@ -142,28 +155,19 @@ public class Docente_Curso_Seccion extends AppCompatActivity {
                 objDocenteCursoBean.setCodigo(codigo);
                 objDocenteCursoBean.setNombre_Curso(nomcurso);
 
-                objDocenteCursoSeccionBean = new DocenteCursoSeccionBean();
-                objDocenteCursoSeccionBean = objDocenteCursoSeccionDAO.CursosporSeccion(objDocenteCursoBean) ;
-                List<String> list = new ArrayList<String>();
-                list.add(objDocenteCursoSeccionBean.getGrado() + " - " + objDocenteCursoSeccionBean.getSeccion()+"\n"+
-                objDocenteCursoSeccionBean.getDia() + " " + objDocenteCursoSeccionBean.getHora_inicio() + "" + objDocenteCursoSeccionBean.getHora_fin()+
-                " " + objDocenteCursoSeccionBean.getTurno());
-                int count = 0;
-                count = list.size();
-                /*if(list.size() == 1){
-                    count = 0;
-                }*/
-                cursos = new String[count];
+
+                listado = new ArrayList<DocenteCursoSeccionBean>();
+                listado = objDocenteCursoSeccionDAO.CursosporSeccion(objDocenteCursoBean);
+                listado_secciones = new ArrayList<String>();
+                int count = listado.size();
                 for(int i=0;i <= count ;i++) {
-                    nombre_curso = objDocenteCursoSeccionBean.getNom_curso();
-                    grado = objDocenteCursoSeccionBean.getGrado();
-                    seccion = objDocenteCursoSeccionBean.getSeccion();
-                    horainicio = objDocenteCursoSeccionBean.getHora_inicio();
-                    horafin = objDocenteCursoSeccionBean.getHora_fin();
-                    turno = objDocenteCursoSeccionBean.getTurno();
-                    dia = objDocenteCursoSeccionBean.getDia();
-                    cursos[i] = grado + " " + seccion + "\n" +
-                          dia  +" "+ horainicio + " " + horafin + " " + turno;
+                    grado = listado.get(i).getGrado();
+                    seccion =  listado.get(i).getSeccion();
+                    horainicio =  listado.get(i).getHora_inicio();
+                    horafin =  listado.get(i).getHora_fin();
+                    turno =  listado.get(i).getTurno();
+                    dia =  listado.get(i).getDia();
+                    listado_secciones.add(i,grado + " " + seccion + "\n" + dia  +" "+ horainicio + " " + horafin + " " + turno);
                 }
             }catch (Exception e){
 
@@ -175,11 +179,18 @@ public class Docente_Curso_Seccion extends AppCompatActivity {
 
         public void onPostExecute(Void result)
         {
-            if (objDocenteCursoSeccionBean != null)
+            if (listado != null)
             {
-                adaptador = new ArrayAdapter<String>(Docente_Curso_Seccion .this, android.R.layout.simple_list_item_1, cursos);
+                adaptador = new ArrayAdapter<String>(Docente_Curso_Seccion .this, android.R.layout.simple_list_item_1,listado_secciones);
                 lv.setAdapter(adaptador);
             }
         }
+    }
+
+    /**
+     * Created by GRLIMA on 26/03/2017.
+     */
+
+    public static class AdapterLista {
     }
 }

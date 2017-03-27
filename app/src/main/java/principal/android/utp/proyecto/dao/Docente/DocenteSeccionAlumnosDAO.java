@@ -19,30 +19,43 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import principal.android.utp.proyecto.bean.Alumno.Alumno_SeccionBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
 
 import static android.content.ContentValues.TAG;
 
-public class DocenteCursoSeccionDAO {
-    DocenteCursoSeccionBean result;
-    ArrayList<DocenteCursoSeccionBean> listado = new ArrayList<DocenteCursoSeccionBean>();
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/detailCourse2";
+/**
+ * Created by GRLIMA on 25/03/2017.
+ */
 
-    public ArrayList<DocenteCursoSeccionBean> CursosporSeccion(DocenteCursoBean objdocenteCursoBean)
+public class DocenteSeccionAlumnosDAO {
+    Alumno_SeccionBean result;
+    ArrayList<Alumno_SeccionBean> listado = new ArrayList<Alumno_SeccionBean>();
+    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/contentCourse2";
+
+    public ArrayList<Alumno_SeccionBean> AlumnosporSeccion(DocenteCursoSeccionBean objdocenteCursoSeccionBean)
     {
         InputStream is = null;
-        String linea,txtcodigo,txtnom;
+        String linea,codigodocente,curso,hi,hf,grado,seccion;
 
         try
         {
-            txtcodigo = objdocenteCursoBean.getCodigo();
-            txtnom = objdocenteCursoBean.getNombre_Curso();
+            codigodocente = objdocenteCursoSeccionBean.getCodigo_docente();
+            curso = objdocenteCursoSeccionBean.getNom_curso();
+            hi = objdocenteCursoSeccionBean.getHora_inicio();
+            hf = objdocenteCursoSeccionBean.getHora_fin();
+            grado = objdocenteCursoSeccionBean.getGrado();
+            seccion = objdocenteCursoSeccionBean.getSeccion();
 
             List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 
-            parametros.add(new BasicNameValuePair("CODIGO",txtcodigo));
-            parametros.add(new BasicNameValuePair("NOMCUR",txtnom));
+            parametros.add(new BasicNameValuePair("CODIGO",codigodocente));
+            parametros.add(new BasicNameValuePair("NOMCUR",curso));
+            parametros.add(new BasicNameValuePair("HORAI",hi));
+            parametros.add(new BasicNameValuePair("HORAF",hf));
+            parametros.add(new BasicNameValuePair("GRADO",grado));
+            parametros.add(new BasicNameValuePair("SECCION",seccion));
 
             HttpClient cn = new DefaultHttpClient();
             HttpPost post = new HttpPost(ruta);
@@ -67,14 +80,15 @@ public class DocenteCursoSeccionDAO {
 
             for (int i = 0; i < json.length(); i++) {
                 JSONObject jsonobject = json.getJSONObject(i);
-                result = new DocenteCursoSeccionBean();
-               // result.setNom_curso(jsonobject.getString("Des_Nombre"));
-                result.setDia(jsonobject.getString("Dia"));
-                result.setGrado(jsonobject.getString("Grado"));
-                result.setSeccion(jsonobject.getString("Seccion"));
-                result.setTurno(jsonobject.getString("Turno"));
-                result.setHora_inicio(jsonobject.getString("Hora_Inicio"));
-                result.setHora_fin(jsonobject.getString("Hora_Fin"));
+                result = new Alumno_SeccionBean();
+                result.setDes_ApellidoPat(jsonobject.getString("Des_ApellidoPat"));
+                result.setDes_ApellidoMat(jsonobject.getString("Des_ApellidoMat"));
+                result.setDes_Nombre(jsonobject.getString("Des_Nombre"));
+                result.setNota_I(jsonobject.getString("Nota_I"));
+                result.setNota_II(jsonobject.getString("Nota_II"));
+                result.setNota_III(jsonobject.getString("Nota_III"));
+                result.setNota_IV(jsonobject.getString("Nota_IV"));
+                result.setPromedio(jsonobject.getString("Promedio"));
                 listado.add(result);
             }
 

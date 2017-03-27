@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
+import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
 import principal.android.utp.proyecto.bean.UsuarioBean;
 import principal.android.utp.proyecto.dao.Docente.DocenteCursoDAO;
 import principal.android.utp.proyecto.dao.UsuarioDAO;
@@ -37,9 +38,10 @@ public class Docente_Cursos extends AppCompatActivity {
     ListView lv;
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    private String[] cursos;
     String nombre_curso;
     ArrayAdapter<String> adaptador;
+    ArrayList<DocenteCursoBean> listado;
+    ArrayList<String> listado_cursos;
     DocenteCursoBean objDocenteCursoBean;
     DocenteCursoDAO objDocenteCursoDAO;
     @Override
@@ -59,9 +61,14 @@ public class Docente_Cursos extends AppCompatActivity {
                     Intent objIntent = new Intent(Docente_Cursos.this, Docente_Curso_Seccion.class);
                     objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
                     objIntent.putExtra("nombre", getIntent().getStringExtra("nombre"));
-                    objIntent.putExtra("nomcurso",  cursos[position].toString());
+                    objIntent.putExtra("nomcurso", listado.get(position).getNombre_Curso());
                     startActivity(objIntent);
                     finish();
+
+                if(listado_cursos.get(position).toString() == ""){
+                    Toast.makeText(getApplicationContext(), "No tiene Secciones en este curso",
+                            Toast.LENGTH_LONG).show();
+                }
 
 
             }
@@ -144,15 +151,14 @@ public class Docente_Cursos extends AppCompatActivity {
 
                 String codigo = getIntent().getStringExtra("codigo");
                 objDocenteCursoDAO  = new DocenteCursoDAO();
-                objDocenteCursoBean = objDocenteCursoDAO.MostrarCursos(codigo) ;
-                List<String> list = new ArrayList<String>();
-                list.add(objDocenteCursoBean.getNombre_Curso());
-                int count = 0;
-                count = list.size();
-                cursos = new String[count];
+                listado = new ArrayList<DocenteCursoBean>();
+                listado= objDocenteCursoDAO.MostrarCursos(codigo) ;
+                listado_cursos = new ArrayList<String>();
+                int count = listado.size();
+                String nombre_curso;
                 for(int i=0;i <= count ;i++) {
-                    nombre_curso = objDocenteCursoBean.getNombre_Curso();
-                    cursos[i] = nombre_curso;
+                    nombre_curso = listado.get(i).getNombre_Curso();
+                    listado_cursos.add(i,nombre_curso);
                 }
             }catch (Exception e){
 
@@ -164,9 +170,9 @@ public class Docente_Cursos extends AppCompatActivity {
 
         public void onPostExecute(Void result)
             {
-                if (objDocenteCursoBean != null)
+                if (listado != null)
                    {
-                     adaptador = new ArrayAdapter<String>(Docente_Cursos.this, android.R.layout.simple_list_item_1, cursos);
+                     adaptador = new ArrayAdapter<String>(Docente_Cursos.this, android.R.layout.simple_list_item_1, listado_cursos);
                      lv.setAdapter(adaptador);
                    }
             }
