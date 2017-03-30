@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="principal.android.utp.proyecto.Principal"
+    android:background="@color/colorPrimaryDark">
+
+    <TextView
+        android:text="Contraseña"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:textColor="@color/colorLetraButton"
+        android:layout_alignBaseline="@+id/txtContraseña"
+        android:layout_alignBottom="@+id/txtContraseña"
+        android:layout_toLeftOf="@+id/txtContraseña"
+        android:layout_toStartOf="@+id/txtContraseña" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario"
+        android:id="@+id/textView"
+        android:textColor="@color/colorLetraButton"
+        android:layout_alignBaseline="@+id/txtUsuario"
+        android:layout_alignBottom="@+id/txtUsuario"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtUsuario"
+        android:textColor="@android:color/white"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/btnIngresar"
+        android:layout_alignLeft="@+id/txtContraseña"
+        android:layout_alignStart="@+id/txtContraseña" />
+
+    <Button
+        android:text="Ingresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtContraseña"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginTop="28dp"
+        android:id="@+id/btnIngresar"
+        android:theme="@style/MyButton"
+        style="@style/Widget.AppCompat.Button"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button"
+        android:textColor="@color/colorLetraButton" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/logo"
+        android:id="@+id/imageView8"
+        android:layout_above="@+id/txtUsuario"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/txtContraseña"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/txtUsuario"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="11dp" />
+</RelativeLayout>

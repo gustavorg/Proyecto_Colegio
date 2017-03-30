@@ -13,7 +13,7 @@ import android.widget.Toast;
 import principal.android.utp.proyecto.bean.UsuarioBean;
 import principal.android.utp.proyecto.dao.UsuarioDAO;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class Principal extends AppCompatActivity implements View.OnClickListener{
 
     Button btnIngresar;
     EditText txtUsuario,txtContraseña;
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.principal);
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtContraseña = (EditText)findViewById(R.id.txtContraseña);
         btnIngresar = (Button) findViewById(R.id.btnIngresar);
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         private ProgressDialog progressDialog;
 
         protected void onPreExecute(){
-            progressDialog = ProgressDialog.show(MainActivity.this,"Validando Datos!!","Espere unos segundos!!",true);
+            progressDialog = ProgressDialog.show(Principal.this,"Validando Datos!!","Espere unos segundos!!",true);
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         }
 
@@ -85,13 +85,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String tipo = resultado.getTipo_Usuario().toString();
 
                 if(tipo.equals("docente")){
-                    Intent objIntent = new Intent(MainActivity.this,Docente.class);
+                    Intent objIntent = new Intent(Principal.this,Docente.class);
                     objIntent.putExtra("codigo", resultado.getCodigo().toString());
                     objIntent.putExtra("nombre", resultado.getDes_Nombre().toString()+ " "+ resultado.getDes_ApellidoPat().toString() + " " + resultado.getDes_ApeliidoMat().toString() );
                     startActivity(objIntent);
                     finish();
                 }else if (tipo.equals("alumno")){
-                    Intent objIntent = new Intent(MainActivity.this,Alumno.class);
+                    Intent objIntent = new Intent(Principal.this,Alumno.class);
                     objIntent.putExtra("codigo", resultado.getCodigo().toString());
                     objIntent.putExtra("nombre", resultado.getDes_Nombre().toString()+ " "+ resultado.getDes_ApellidoPat().toString() + " " + resultado.getDes_ApeliidoMat().toString() );
                     startActivity(objIntent);
@@ -107,13 +107,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         public void onPostExecute(Void result){
             if (resultado == null) {
-                Toast.makeText(getApplicationContext(), "Error",
+              //  progressDialog.setTitle("Cargando..."); progressDialog.dismiss();
+                progressDialog.dismiss();
+               Toast.makeText(getApplicationContext(), "Por favor, Ingrese los datos correctos",
                         Toast.LENGTH_SHORT).show();
-            } else {
-                progressDialog.setTitle("Cargando...");
+
             }
 
-            progressDialog.dismiss();
+
         }
     }
 }

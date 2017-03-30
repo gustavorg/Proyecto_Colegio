@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="principal.android.utp.proyecto.MainActivity"
+    tools:context="principal.android.utp.proyecto.Principal"
     android:background="@color/colorPrimaryDark">
 
     <TextView
@@ -16,21 +16,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView2"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:textColor="@color/colorLetraButton"
+        android:layout_alignBaseline="@+id/txtContraseña"
         android:layout_alignBottom="@+id/txtContraseña"
         android:layout_toLeftOf="@+id/txtContraseña"
-        android:layout_toStartOf="@+id/txtContraseña"
-        android:layout_marginRight="29dp"
-        android:layout_marginEnd="29dp"
-        android:textColor="@color/colorLetraButton" />
+        android:layout_toStartOf="@+id/txtContraseña" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Usuario"
         android:id="@+id/textView"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textView2"
-        android:textColor="@color/colorLetraButton" />
+        android:textColor="@color/colorLetraButton"
+        android:layout_alignBaseline="@+id/txtUsuario"
+        android:layout_alignBottom="@+id/txtUsuario"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,10 +41,10 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/txtUsuario"
+        android:textColor="@android:color/white"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white" />
+        android:layout_alignLeft="@+id/txtContraseña"
+        android:layout_alignStart="@+id/txtContraseña" />
 
     <Button
         android:text="Ingresar"
@@ -74,8 +77,10 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/txtContraseña"
+        android:textColor="@android:color/white"
         android:layout_below="@+id/txtUsuario"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:textColor="@android:color/white" />
+        android:layout_marginRight="124dp"
+        android:layout_marginEnd="124dp" />
 </RelativeLayout>

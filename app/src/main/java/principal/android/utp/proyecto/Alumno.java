@@ -3,8 +3,6 @@ package principal.android.utp.proyecto;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +16,7 @@ public class Alumno extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alumno);
+        setContentView(R.layout.principal_alumno);
 
         btnHorario = (Button) findViewById(R.id.btnHorario);
         btnCursos = (Button) findViewById(R.id.btnCursos);
@@ -44,7 +42,7 @@ public class Alumno extends AppCompatActivity {
         });
         btnSalir.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent objIntent = new Intent(Alumno.this, MainActivity.class);
+                Intent objIntent = new Intent(Alumno.this, Principal.class);
                 startActivity(objIntent);
             }
         });

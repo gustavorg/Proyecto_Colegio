@@ -21,10 +21,9 @@
                 >
 
                 <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
+                    android:id="@+id/toolbar_cursos"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="?attr/colorPrimary"
                     />
 
             </android.support.design.widget.AppBarLayout>
@@ -40,6 +39,8 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/nav_header"
             app:menu="@menu/menu_navigation"/>
+
+
 
     </android.support.v4.widget.DrawerLayout>
 

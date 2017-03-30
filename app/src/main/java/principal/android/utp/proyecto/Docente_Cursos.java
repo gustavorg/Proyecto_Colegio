@@ -3,6 +3,7 @@ package principal.android.utp.proyecto;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -37,7 +38,7 @@ public class Docente_Cursos extends AppCompatActivity {
 
     ListView lv;
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+    private Toolbar toolbarD;
     String nombre_curso;
     ArrayAdapter<String> adaptador;
     ArrayList<DocenteCursoBean> listado;
@@ -48,7 +49,11 @@ public class Docente_Cursos extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.docente_cursos);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbarD = (Toolbar) findViewById(R.id.toolbar_cursos);
+        setSupportActionBar(toolbarD);
+        getSupportActionBar().setTitle("Cursos");
+        toolbarD.setTitleTextColor(Color.WHITE);
+
         initNavigationDrawer();
         lv = (ListView)findViewById(R.id.lv);
         final asyncMostrarCursosDocente Listar = new asyncMostrarCursosDocente();
@@ -58,7 +63,7 @@ public class Docente_Cursos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
 
-                    Intent objIntent = new Intent(Docente_Cursos.this, Docente_Curso_Seccion.class);
+                    Intent objIntent = new Intent(Docente_Cursos.this, docente_curso_sec.class);
                     objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
                     objIntent.putExtra("nombre", getIntent().getStringExtra("nombre"));
                     objIntent.putExtra("nomcurso", listado.get(position).getNombre_Curso());
@@ -117,7 +122,7 @@ public class Docente_Cursos extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbarD,R.string.drawer_open,R.string.drawer_close){
 
             @Override
             public void onDrawerClosed(View v){

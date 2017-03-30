@@ -9,23 +9,26 @@
     android:layout_height="190dp">
 
     <ImageView
-        android:src="@drawable/docente"
-        android:layout_width="wrap_content"
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_weight="1"
-        android:layout_height="0dp" />
+        android:layout_weight="0.40"
+        android:src="@drawable/docente" />
+
     <TextView
         android:id="@+id/codigo"
-        android:textColor="@color/colorLetraButton"
-        android:textSize="18sp"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorLetraButton"
+        android:textSize="14sp" />
+
     <TextView
         android:id="@+id/nombre"
-        android:textColor="@color/colorLetraButton"
-        android:textSize="18sp"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/colorLetraButton"
+        android:textSize="14sp" />
 </LinearLayout>
