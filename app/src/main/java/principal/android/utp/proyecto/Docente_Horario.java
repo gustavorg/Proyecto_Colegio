@@ -1,86 +1,121 @@
 package principal.android.utp.proyecto;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
+import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
+import principal.android.utp.proyecto.bean.UsuarioBean;
+import principal.android.utp.proyecto.dao.Docente.DocenteCursoDAO;
+import principal.android.utp.proyecto.dao.UsuarioDAO;
 
 /**
  * Created by GRLIMA on 11/02/2017.
  */
 
-public class Docente_Horario extends AppCompatActivity {
+public class Docente_Horario extends Fragment {
 
+    ListView lv;
     private DrawerLayout drawerLayout;
-    private Toolbar toolbar;
+    private Toolbar toolbarD;
+    String nombre_curso;
+    ArrayAdapter<String> adaptador;
+    ArrayList<DocenteCursoBean> listado;
+    ArrayList<String> listado_cursos;
+    DocenteCursoBean objDocenteCursoBean;
+    DocenteCursoDAO objDocenteCursoDAO;
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.docente_horario, container, false);
+        lv = (ListView)view.findViewById(R.id.lv_horario);
+        final asyncMostrarCursosDocente Listar = new asyncMostrarCursosDocente();
+        Listar.execute();
+
+        return view;
+    }
+
+
+
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.docente_horario);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        initNavigationDrawer();
+
     }
 
-    public void initNavigationDrawer() {
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+    // Listar Cursos del Docente ////////////////////////////////////////////////////////////////////
 
-                int id = menuItem.getItemId();
-                Intent objIntent;
-                switch (id){
-                    case R.id.home:
-                        objIntent = new Intent(Docente_Horario.this, Docente.class);
-                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
-                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
-                        startActivity(objIntent);
-                        break;
-                    case R.id.cursos:
-                        objIntent = new Intent(Docente_Horario.this,Docente_Cursos.class);
-                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
-                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
-                        startActivity(objIntent);
-                        break;
-                    case R.id.horario:
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.logout:
-                        finish();
+    class asyncMostrarCursosDocente extends AsyncTask<String,Void,Void>
+    {
+        private ProgressDialog progressDialog;
 
+        protected void onPreExecute(){
+
+        }
+
+        @Override
+        protected Void doInBackground(String... params) {
+            try {
+
+                String codigo = ((ApplicationApp) getActivity().getApplication() ).getCodigo();
+                objDocenteCursoDAO  = new DocenteCursoDAO();
+                listado = new ArrayList<DocenteCursoBean>();
+                listado= objDocenteCursoDAO.MostrarCursos(codigo) ;
+                listado_cursos = new ArrayList<String>();
+                int count = listado.size();
+                String nombre_curso;
+                for(int i=0;i <= count ;i++) {
+                    nombre_curso = listado.get(i).getNombre_Curso();
+                    listado_cursos.add(i,nombre_curso);
                 }
-                return true;
-            }
-        });
-        View header = navigationView.getHeaderView(0);
-        TextView codigo = (TextView)header.findViewById(R.id.codigo);
-        TextView nombre = (TextView)header.findViewById(R.id.nombre);
+            }catch (Exception e){
 
-        codigo.setText(getIntent().getStringExtra("codigo"));
-        nombre.setText(getIntent().getStringExtra("nombre"));
-
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
-
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
-
-            @Override
-            public void onDrawerClosed(View v){
-                super.onDrawerClosed(v);
             }
 
-            @Override
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
+            return null;
+        }
+
+
+        public void onPostExecute(Void result)
+        {
+            if (listado != null)
+            {
+                adaptador = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listado_cursos);
+                lv.setAdapter(adaptador);
             }
-        };
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
+        }
     }
+
 }
+

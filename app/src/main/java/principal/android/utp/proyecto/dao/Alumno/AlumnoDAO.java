@@ -1,4 +1,4 @@
-package principal.android.utp.proyecto.dao.Docente;
+package principal.android.utp.proyecto.dao.Alumno;
 
 import android.util.Log;
 
@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import principal.android.utp.proyecto.bean.Alumno.Alumno_SeccionBean;
-import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoSeccionBean;
 
 import static android.content.ContentValues.TAG;
@@ -29,12 +28,12 @@ import static android.content.ContentValues.TAG;
  * Created by GRLIMA on 25/03/2017.
  */
 
-public class DocenteSeccionAlumnosDAO {
+public class AlumnoDAO {
     Alumno_SeccionBean result;
     ArrayList<Alumno_SeccionBean> listado = new ArrayList<Alumno_SeccionBean>();
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/contentCourse2";
+    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/detailForStudent";
 
-    public ArrayList<Alumno_SeccionBean> AlumnosporSeccion(DocenteCursoSeccionBean objdocenteCursoSeccionBean)
+    public ArrayList<Alumno_SeccionBean> AlumnosporSeccion(DocenteCursoSeccionBean objdocenteCursoSeccionBean,String codigoalumno)
     {
         InputStream is = null;
         String linea,codigodocente,curso,hi,hf,grado,seccion;
@@ -56,6 +55,7 @@ public class DocenteSeccionAlumnosDAO {
             parametros.add(new BasicNameValuePair("HORAF",hf));
             parametros.add(new BasicNameValuePair("GRADO",grado));
             parametros.add(new BasicNameValuePair("SECCION",seccion));
+            parametros.add(new BasicNameValuePair("COD_ALUMNO",codigoalumno));
 
             HttpClient cn = new DefaultHttpClient();
             HttpPost post = new HttpPost(ruta);
@@ -81,15 +81,10 @@ public class DocenteSeccionAlumnosDAO {
             for (int i = 0; i < json.length(); i++) {
                 JSONObject jsonobject = json.getJSONObject(i);
                 result = new Alumno_SeccionBean();
-                result.setCodigo_Alumno(jsonobject.getString("Codigo_Alumno"));
-                result.setDes_ApellidoPat(jsonobject.getString("Des_ApellidoPat"));
-                result.setDes_ApellidoMat(jsonobject.getString("Des_ApellidoMat"));
-                result.setDes_Nombre(jsonobject.getString("Des_Nombre"));
                 result.setNota_I(jsonobject.getString("Nota_I"));
                 result.setNota_II(jsonobject.getString("Nota_II"));
                 result.setNota_III(jsonobject.getString("Nota_III"));
                 result.setNota_IV(jsonobject.getString("Nota_IV"));
-                result.setPromedio(jsonobject.getString("Promedio"));
                 listado.add(result);
             }
 

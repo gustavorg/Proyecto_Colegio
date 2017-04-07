@@ -86,14 +86,17 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
 
                 if(tipo.equals("docente")){
                     Intent objIntent = new Intent(Principal.this,Docente.class);
-                    objIntent.putExtra("codigo", resultado.getCodigo().toString());
-                    objIntent.putExtra("nombre", resultado.getDes_Nombre().toString()+ " "+ resultado.getDes_ApellidoPat().toString() + " " + resultado.getDes_ApeliidoMat().toString() );
+                    ((ApplicationApp)getApplication()).setCodigo(resultado.getCodigo());
+                    ((ApplicationApp)getApplication()).setNombre(resultado.getDes_Nombre()+ " "+ resultado.getDes_ApellidoPat() + " " + resultado.getDes_ApeliidoMat());
+
+                    objIntent.putExtra("codigo", resultado.getCodigo());
+                    objIntent.putExtra("nombre", resultado.getDes_Nombre()+ " "+ resultado.getDes_ApellidoPat() + " " + resultado.getDes_ApeliidoMat() );
                     startActivity(objIntent);
                     finish();
                 }else if (tipo.equals("alumno")){
                     Intent objIntent = new Intent(Principal.this,Alumno.class);
-                    objIntent.putExtra("codigo", resultado.getCodigo().toString());
-                    objIntent.putExtra("nombre", resultado.getDes_Nombre().toString()+ " "+ resultado.getDes_ApellidoPat().toString() + " " + resultado.getDes_ApeliidoMat().toString() );
+                    objIntent.putExtra("codigo", resultado.getCodigo());
+                    objIntent.putExtra("nombre", resultado.getDes_Nombre()+ " "+ resultado.getDes_ApellidoPat() + " " + resultado.getDes_ApeliidoMat() );
                     startActivity(objIntent);
                     finish();
                 }

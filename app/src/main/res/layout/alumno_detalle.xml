@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Docente_Curso_Seccion"
-    android:id="@+id/seccionesframe">
-
-    <include layout="@layout/content_docente_curso_seccion" />
-
+    android:id="@+id/alumno_detalleframe"
+    tools:context=".Alumno_Detalle">
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_alumno_detalle" />
 
 </FrameLayout>

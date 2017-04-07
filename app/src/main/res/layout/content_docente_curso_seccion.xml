@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="principal.android.utp.proyecto.Docente_Curso_Seccion"
     tools:showIn="@layout/docente_curso_seccion">
+
+    <TextView
+        android:id="@+id/SeccionCurso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLetraButton"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="452dp"
         android:background="@color/colorAccent"
         android:id="@+id/lvseccion" />
 </LinearLayout>

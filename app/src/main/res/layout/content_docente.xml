@@ -8,15 +8,12 @@
 
     tools:context="principal.android.utp.proyecto.Docente"
     tools:showIn="@layout/principal_docente">
-    <com.synnapps.carouselview.CarouselView
-        android:id="@+id/carouselView"
+
+
+    <FrameLayout
+        android:id="@+id/flContent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:fillColor="#FFFFFFFF"
-        app:pageColor="#00000000"
-        app:radius="6dp"
-        app:slideInterval="3000"
-        app:strokeColor="#FF777777"
-        app:strokeWidth="1dp"/>
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

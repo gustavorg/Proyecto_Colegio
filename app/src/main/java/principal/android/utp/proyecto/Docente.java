@@ -2,9 +2,14 @@ package principal.android.utp.proyecto;
 
 import android.content.Intent;
 
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,11 +29,13 @@ import com.synnapps.carouselview.ImageListener;
 
 public class Docente extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
     private Toolbar toolbar;
-    CarouselView carouselView;
 
-    int[] sampleImages = {R.drawable.carrousel1, R.drawable.carrousel2, R.drawable.carrousel3, R.drawable.carrousel4};
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout mDrawer;
+    private NavigationView nvDrawer;
+
+
   //  ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,81 +43,112 @@ public class Docente extends AppCompatActivity {
         setContentView(R.layout.principal_docente);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Inicio");
         toolbar.setTitleTextColor(Color.WHITE);
 
-        initNavigationDrawer();
 
-        carouselView = (CarouselView) findViewById(R.id.carouselView);
-        carouselView.setPageCount(sampleImages.length);
+        mDrawer = (DrawerLayout) findViewById(R.id.drawer);
+        nvDrawer = (NavigationView) findViewById(R.id.navigation_view);
 
-        carouselView.setImageListener(imageListener);
-   /*     mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);
-        AndroidImageAdapter adapterView = new AndroidImageAdapter(this);
-        mViewPager.setAdapter(adapterView);*/
+        drawerToggle = setupDrawerToggle();
+        setupDrawerContent(nvDrawer);
+
+
+        mDrawer.addDrawerListener(drawerToggle);
+
+        // INICIALIZACION DE FRAGMENT
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, new InicioFragment() ).commit();
+
+        mDrawer.closeDrawers();
+
+
+        View headerView = nvDrawer.getHeaderView( 0 );
+
+        ImageView teacherImageView = ( ImageView ) headerView.findViewById(R.id.imageView5);
+        TextView teacherNameView = (TextView) headerView.findViewById(R.id.codigo);
+        TextView teacherEmailView = ( TextView ) headerView.findViewById(R.id.nombre);
+
+       /* Picasso.with( this ).load( currentUser.getAvatar() ).transform( new CircleTransform() ).into(teacherImageView);*/
+        teacherNameView.setText( ((ApplicationApp)getApplication() ).getCodigo());
+        teacherEmailView.setText( ((ApplicationApp)getApplication() ).getNombre());
+
+
+
+
     }
 
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
+
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        drawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        return new ActionBarDrawerToggle(this, mDrawer, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-    };
+    }
+    public void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                        selectDrawerItem(menuItem);
+                        return true;
+                    }
+                });
 
-    public void initNavigationDrawer() {
+    }
 
-        NavigationView navigationView = (NavigationView)findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
+    private void selectDrawerItem(MenuItem menuItem) {
+        Fragment fragment = null;
+        Class fragmentClass;
+        switch(menuItem.getItemId()) {
+            case R.id.cursos:
+                fragmentClass = Docente_Cursos.class;
+                break;
+            case R.id.home:
+                fragmentClass = InicioFragment.class;
 
-                int id = menuItem.getItemId();
-                Intent objIntent;
-                switch (id){
-                    case R.id.home:
-                        drawerLayout.closeDrawers();
-                        break;
-                    case R.id.cursos:
-                        objIntent = new Intent(Docente.this, Docente_Cursos.class);
-                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
-                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
-                        startActivity(objIntent);
-                        break;
-                    case R.id.horario:
-                        objIntent = new Intent(Docente.this, Docente_Horario.class);
-                        objIntent.putExtra("codigo", getIntent().getStringExtra("codigo"));
-                        objIntent.putExtra("nombre", getIntent().getStringExtra("nombre") );
-                        startActivity(objIntent);
-                        break;
-                    case R.id.logout:
-                        finish();
+                break;
+            default:
+                fragmentClass = InicioFragment.class;
+        }
 
-                }
-                return true;
-            }
-        });
-        View header = navigationView.getHeaderView(0);
-        TextView codigo = (TextView)header.findViewById(R.id.codigo);
-        TextView nombre = (TextView)header.findViewById(R.id.nombre);
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        codigo.setText(getIntent().getStringExtra("codigo"));
-        nombre.setText(getIntent().getStringExtra("nombre"));
+        // Insert the fragment by replacing any existing fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
+        // Highlight the selected item has been done by NavigationView
+        menuItem.setChecked(true);
+        // Set action bar title
+        setTitle(menuItem.getTitle());
+        // Close the navigation drawer
+        mDrawer.closeDrawers();
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
-
-            @Override
-            public void onDrawerClosed(View v){
-                super.onDrawerClosed(v);
-            }
-
-            @Override
-            public void onDrawerOpened(View v) {
-                super.onDrawerOpened(v);
-            }
-        };
-        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        actionBarDrawerToggle.syncState();
     }
 }
