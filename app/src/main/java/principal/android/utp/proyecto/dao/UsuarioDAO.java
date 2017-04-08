@@ -28,8 +28,8 @@ import principal.android.utp.proyecto.bean.UsuarioBean;
 
 public class UsuarioDAO {
     UsuarioBean result;
-    String ruta1="http://10.0.3.2:8080/sistemacolegio/index.php/student/loginController";
-    String ruta2="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/loginController";
+    String ruta1="http://192.241.166.108/sistemacolegio/index.php/student/loginController";
+    String ruta2="http://192.241.166.108/sistemacolegio/index.php/teacher/loginController";
 
     public UsuarioBean ValidarDatos(UsuarioBean objUsuarioBean)
     {

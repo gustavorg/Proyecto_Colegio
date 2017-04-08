@@ -26,7 +26,7 @@ import static android.content.ContentValues.TAG;
 public class DocenteCursoDAO {
     DocenteCursoBean result;
     ArrayList<DocenteCursoBean> listado = new ArrayList<DocenteCursoBean>();
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController";
+    String ruta="http://192.241.166.108/sistemacolegio/index.php/teacher/courseController";
 
     public ArrayList<DocenteCursoBean> MostrarCursos(String codigo)
     {

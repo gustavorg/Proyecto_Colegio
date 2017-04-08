@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.squareup.picasso.Picasso;
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
@@ -16,11 +17,17 @@ import com.synnapps.carouselview.ImageListener;
 public class InicioFragment extends Fragment {
     CarouselView carouselView;
     int[] sampleImages = {R.drawable.carrousel1, R.drawable.carrousel2, R.drawable.carrousel3, R.drawable.carrousel4};
+    String[] sampleNetworkImageURLs = {
+            "http://192.241.166.108/sistemacolegio/assets/img/slider/slider_01.jpg",
+            "http://192.241.166.108/sistemacolegio/assets/img/slider/slider_02.jpg",
+            "http://192.241.166.108/sistemacolegio/assets/img/slider/slider_03.jpg"
+    };
     private OnFragmentInteractionListener mListener;
 
     public InicioFragment() {
 
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

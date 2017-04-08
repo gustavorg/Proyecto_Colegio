@@ -8,6 +8,7 @@ public class Alumno_SeccionBean {
 
 
     private String codigo_Alumno;
+    private String codigo_Curso;
     private String Des_ApellidoPat;
     private String Des_ApellidoMat;
     private String Des_Nombre;
@@ -20,7 +21,7 @@ public class Alumno_SeccionBean {
     public Alumno_SeccionBean() {
     }
 
-    public Alumno_SeccionBean(String codigo_Alumno ,String des_ApellidoPat, String des_ApellidoMat, String des_Nombre, String nota_I, String nota_II, String nota_III, String nota_IV, String promedio) {
+    public Alumno_SeccionBean(String codigo_Alumno ,String codigo_Curso, String des_ApellidoPat, String des_ApellidoMat, String des_Nombre, String nota_I, String nota_II, String nota_III, String nota_IV, String promedio) {
         setDes_ApellidoPat(des_ApellidoPat);
         setDes_ApellidoMat(des_ApellidoMat);
         setDes_Nombre(des_Nombre);
@@ -30,8 +31,16 @@ public class Alumno_SeccionBean {
         setNota_IV(nota_IV);
         setPromedio(promedio);
         setCodigo_Alumno(codigo_Alumno);
+        setCodigo_Curso(codigo_Curso);
     }
 
+    public String getCodigo_Curso() {
+        return codigo_Curso;
+    }
+
+    public void setCodigo_Curso(String codigo_Curso) {
+        this.codigo_Curso = codigo_Curso;
+    }
     public String getCodigo_Alumno() {
         return codigo_Alumno;
     }

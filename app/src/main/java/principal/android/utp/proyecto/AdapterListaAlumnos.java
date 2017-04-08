@@ -39,7 +39,7 @@ public class AdapterListaAlumnos extends ArrayAdapter<Alumno_SeccionBean> {
         v = inflater.inflate(R.layout.grilla_alumno, null);
         TextView textView = (TextView) v.findViewById(R.id.txtNombre);
         ImageView imageView = (ImageView) v.findViewById(R.id.imgAlumno);
-        textView.setText((lista_Alumnos.get(position).getCodigo_Alumno() + " - " + lista_Alumnos.get(position).getDes_ApellidoPat() + lista_Alumnos.get(position).getDes_ApellidoMat() + lista_Alumnos.get(position).getDes_Nombre()));
+        textView.setText((lista_Alumnos.get(position).getCodigo_Alumno() + " - " + lista_Alumnos.get(position).getDes_ApellidoPat() + " " +  lista_Alumnos.get(position).getDes_ApellidoMat() + " " + lista_Alumnos.get(position).getDes_Nombre()));
         imageView.setImageResource(R.drawable.alumno);
         return v;
 

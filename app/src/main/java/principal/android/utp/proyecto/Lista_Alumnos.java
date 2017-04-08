@@ -60,27 +60,21 @@ public class Lista_Alumnos extends Fragment {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
-
+        String codigocurso = getArguments().getString("Codigo_Curso");
                 Bundle args = new Bundle();
                 //Alumno
-                args.putString("codigo_Alumno", listado.get(position).getCodigo_Alumno());
+                args.putString("cod_alumno", listado.get(position).getCodigo_Alumno());
                 args.putString("apP",  listado.get(position).getDes_ApellidoPat());
                 args.putString("apM",  listado.get(position).getDes_ApellidoMat());
                 args.putString("nom",  listado.get(position).getDes_Nombre());
-              /*  args.putString("nota1",  listado.get(position).getNota_I());
+                args.putString("nota1",  listado.get(position).getNota_I());
                 args.putString("nota2",  listado.get(position).getNota_II());
                 args.putString("nota3",  listado.get(position).getNota_III());
-                args.putString("nota4",  listado.get(position).getNota_IV());*/
+                args.putString("nota4",  listado.get(position).getNota_IV());
 
 
                 //Seccion
-                args.putString("horaI",  getArguments().getString("horaI"));
-                args.putString("horaF",  getArguments().getString("horaF"));
-                args.putString("grado",  getArguments().getString("grado"));
-                args.putString("seccion", getArguments().getString("seccion"));
-                args.putString("curso",  getArguments().getString("nomcurso"));
-
-
+                args.putString("cod_curso", codigocurso);
 
                 Alumno_Detalle fragment4 = new Alumno_Detalle();
                 fragment4.setArguments(args);
@@ -139,5 +133,6 @@ public class Lista_Alumnos extends Fragment {
             }
         }
     }
+
 
 }

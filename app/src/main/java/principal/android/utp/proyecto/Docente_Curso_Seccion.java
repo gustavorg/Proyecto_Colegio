@@ -52,7 +52,7 @@ public class Docente_Curso_Seccion extends Fragment {
         View view = inflater.inflate(R.layout.docente_curso_seccion, container, false);
         TextView  cursoseccion = (TextView)view.findViewById(R.id.SeccionCurso);
         lv = (ListView)view.findViewById(R.id.lvseccion);
-        String  title = "Secciones del curso " + getArguments().getString("nomcurso") ;
+        String  title = "Secciones -" + getArguments().getString("nomcurso") ;
         cursoseccion.setText(title);
 
         final Docente_Curso_Seccion.asyncMostrarCursosDocenteSeccion Listar = new Docente_Curso_Seccion.asyncMostrarCursosDocenteSeccion();
@@ -69,6 +69,7 @@ public class Docente_Curso_Seccion extends Fragment {
                 args.putString("grado",  listado.get(position).getGrado());
                 args.putString("codigo", ((ApplicationApp) getActivity().getApplication() ).getCodigo());
                 args.putString("seccion",  listado.get(position).getSeccion());
+                args.putString("Codigo_Curso",  listado.get(position).getCodigo_curso());
 
                 Lista_Alumnos fragment3 = new Lista_Alumnos();
                 fragment3.setArguments(args);

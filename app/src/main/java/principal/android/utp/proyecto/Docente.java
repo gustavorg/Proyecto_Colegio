@@ -1,7 +1,5 @@
 package principal.android.utp.proyecto;
 
-import android.content.Intent;
-
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,12 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.synnapps.carouselview.CarouselView;
-import com.synnapps.carouselview.ImageListener;
 
 /**
  * Created by GRLIMA on 11/02/2017.
@@ -47,7 +41,7 @@ public class Docente extends AppCompatActivity {
 
 
         mDrawer = (DrawerLayout) findViewById(R.id.drawer);
-        nvDrawer = (NavigationView) findViewById(R.id.navigation_view);
+        nvDrawer = (NavigationView) findViewById(R.id.navigation_view_d);
 
         drawerToggle = setupDrawerToggle();
         setupDrawerContent(nvDrawer);
@@ -57,7 +51,7 @@ public class Docente extends AppCompatActivity {
 
         // INICIALIZACION DE FRAGMENT
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, new InicioFragment() ).commit();
+        fragmentManager.beginTransaction().replace(R.id.flContent_d, new InicioFragment() ).commit();
 
         mDrawer.closeDrawers();
 
@@ -141,7 +135,7 @@ public class Docente extends AppCompatActivity {
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.flContent_d, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);

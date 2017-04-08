@@ -27,7 +27,7 @@ import static android.content.ContentValues.TAG;
 public class DocenteCursoSeccionDAO {
     DocenteCursoSeccionBean result;
     ArrayList<DocenteCursoSeccionBean> listado = new ArrayList<DocenteCursoSeccionBean>();
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/detailCourse2";
+    String ruta="http://192.241.166.108/sistemacolegio/index.php/teacher/courseController/detailCourse2";
 
     public ArrayList<DocenteCursoSeccionBean> CursosporSeccion(DocenteCursoBean objdocenteCursoBean)
     {
@@ -69,6 +69,7 @@ public class DocenteCursoSeccionDAO {
                 JSONObject jsonobject = json.getJSONObject(i);
                 result = new DocenteCursoSeccionBean();
                // result.setNom_curso(jsonobject.getString("Des_Nombre"));
+                result.setCodigo_curso(jsonobject.getString("Cod_Curso"));
                 result.setDia(jsonobject.getString("Dia"));
                 result.setGrado(jsonobject.getString("Grado"));
                 result.setSeccion(jsonobject.getString("Seccion"));

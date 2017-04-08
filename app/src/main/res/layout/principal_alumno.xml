@@ -1,65 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_a"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="@color/colorPrimaryDark">
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 
-    <ImageView
-        android:layout_width="395dp"
-        android:layout_height="185dp"
-        app:srcCompat="@drawable/alumno"
-        android:id="@+id/imageView"
-        android:layout_weight="0.14"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorLetraButton" />
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.learn2crack.myapplication.MainActivity">
 
-    <Button
-        android:text="Horario"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnHorario"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorLetraButton"
-        android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/btnSalir"
-        android:layout_alignStart="@+id/btnSalir"
-        android:layout_marginTop="20dp" />
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-    <Button
-        android:text="Cursos"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnCursos"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorLetraButton"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/btnHorario"
-        android:layout_alignLeft="@+id/btnHorario"
-        android:layout_alignStart="@+id/btnHorario" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_a"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                />
 
-    <Button
-        android:text="Notas"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnNotas"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorLetraButton"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/btnCursos"
-        android:layout_centerHorizontal="true" />
+        </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:text="Salir"
-        android:layout_width="294dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSalir"
-        android:background="@color/colorAccent"
-        android:textColor="@color/colorLetraButton"
-        android:layout_below="@+id/btnNotas"
-        android:layout_alignLeft="@+id/btnNotas"
-        android:layout_alignStart="@+id/btnNotas"
-        android:layout_marginTop="20dp" />
+        <include layout="@layout/content_alumno" />
 
-</RelativeLayout>
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view_a"
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header_a"
+        app:menu="@menu/menu_navigation_a"/>
+
+</android.support.v4.widget.DrawerLayout>

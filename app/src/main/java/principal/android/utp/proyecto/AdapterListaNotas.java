@@ -36,10 +36,7 @@ public class AdapterListaNotas extends ArrayAdapter<Alumno_SeccionBean> {
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.grilla_notas, null);
         TextView textView = (TextView) v.findViewById(R.id.lblNota);
-        textView.setText(( " PC 1 " + lista_notas.get(position).getNota_I() + "\n" +
-                           " PC 2 " + lista_notas.get(position).getNota_II() + "\n" +
-                           " PC 3 " + lista_notas.get(position).getNota_III() + "\n" +
-                           " PC 4 " + lista_notas.get(position).getNota_IV() + "\n" ));
+        textView.setText( " PC 1 " + lista_notas.get(position).getNota_I());
         return v;
 
     }

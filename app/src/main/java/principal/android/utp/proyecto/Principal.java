@@ -95,6 +95,10 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
                     finish();
                 }else if (tipo.equals("alumno")){
                     Intent objIntent = new Intent(Principal.this,Alumno.class);
+                    ((ApplicationApp)getApplication()).setCodigo(resultado.getCodigo());
+                    ((ApplicationApp)getApplication()).setNombre(resultado.getDes_Nombre()+ " "+ resultado.getDes_ApellidoPat() + " " + resultado.getDes_ApeliidoMat());
+
+
                     objIntent.putExtra("codigo", resultado.getCodigo());
                     objIntent.putExtra("nombre", resultado.getDes_Nombre()+ " "+ resultado.getDes_ApellidoPat() + " " + resultado.getDes_ApeliidoMat() );
                     startActivity(objIntent);

@@ -17,20 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Alumno" />
-        <activity android:name=".Alumno_Cursos" />
-        <activity android:name=".Alumno_Horario" />
-        <activity android:name=".Alumno_Notas" />
+        <activity android:name=".Alumno"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name=".Docente"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity
-            android:name=".Docente_Horario"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Lista_Alumnos"
-            android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
 

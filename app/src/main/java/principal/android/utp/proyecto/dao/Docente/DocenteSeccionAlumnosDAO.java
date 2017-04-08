@@ -32,7 +32,7 @@ import static android.content.ContentValues.TAG;
 public class DocenteSeccionAlumnosDAO {
     Alumno_SeccionBean result;
     ArrayList<Alumno_SeccionBean> listado = new ArrayList<Alumno_SeccionBean>();
-    String ruta="http://10.0.3.2:8080/sistemacolegio/index.php/teacher/courseController/contentCourse2";
+    String ruta="http://192.241.166.108/sistemacolegio/index.php/teacher/courseController/contentCourse2";
 
     public ArrayList<Alumno_SeccionBean> AlumnosporSeccion(DocenteCursoSeccionBean objdocenteCursoSeccionBean)
     {
