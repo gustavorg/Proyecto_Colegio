@@ -64,6 +64,7 @@ public class AlumnoCursoDAO {
                 result = new AlumnoCursoBean();
                 JSONObject jsonobject = json.getJSONObject(i);
                 result.setNombre_Curso(jsonobject.getString("Des_Nombre"));
+                result.setCodigo(jsonobject.getString("Codigo_Curso"));
                 listado.add(result);
             }
 

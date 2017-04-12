@@ -1,4 +1,4 @@
-package principal.android.utp.proyecto.dao.Docente;
+package principal.android.utp.proyecto.dao;
 
 import android.util.Log;
 
@@ -19,35 +19,27 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import principal.android.utp.proyecto.ApplicationApp;
-import principal.android.utp.proyecto.bean.Alumno.Alumno_SeccionBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
+import principal.android.utp.proyecto.bean.HorarioBean;
 
 import static android.content.ContentValues.TAG;
 
-public class ActualizarNotaDAO {
- /*   String result;
-    ArrayList<DocenteCursoBean> listado = new ArrayList<DocenteCursoBean>();
-    String ruta="http://192.241.166.108/sistemacolegio/index.php/teacher/notaController";
+public class HorarioDAO {
+    HorarioBean result;
+    ArrayList<HorarioBean> listado = new ArrayList<HorarioBean>();
+    String ruta="http://192.241.166.108/sistemacolegio/index.php/teacher/scheduleController/mostrarHorario";
 
-    public String EditarNota(String cod_curso , String cod_alumno, String cod_docente ,String n1, String n2,String n3,String n4)
+    public ArrayList<HorarioBean> MostrarHorario(String codigo,String dia)
     {
         InputStream is = null;
         String linea;
 
         try
         {
-
             List<NameValuePair> parametros = new ArrayList<NameValuePair>();
 
-            parametros.add(new BasicNameValuePair("COD_CURSO",cod_curso));
-            parametros.add(new BasicNameValuePair("COD_DOCENTE",cod_docente));
-            parametros.add(new BasicNameValuePair("COD_ALUMNO",cod_alumno));
-            parametros.add(new BasicNameValuePair("N1",n1));
-            parametros.add(new BasicNameValuePair("N2",n2));
-            parametros.add(new BasicNameValuePair("N3",n3));
-            parametros.add(new BasicNameValuePair("N4",n4));
-
+            parametros.add(new BasicNameValuePair("CODIGO",codigo));
+            parametros.add(new BasicNameValuePair("DIA",dia));
 
             HttpClient cn = new DefaultHttpClient();
             HttpPost post = new HttpPost(ruta);
@@ -69,13 +61,23 @@ public class ActualizarNotaDAO {
             is.close();
 
             JSONArray json = new JSONArray(trama.toString());
-            if(!json.equals("")) result = ;
-            else result = ;
+            for (int i = 0; i < json.length(); i++) {
+                result = new HorarioBean();
+                JSONObject jsonobject = json.getJSONObject(i);
+                result.setCurso(jsonobject.getString("Des_Nombre"));
+                result.setGrado(jsonobject.getString("Grado"));
+                result.setSeccion(jsonobject.getString("Seccion"));
+                result.setHora_Inicio(jsonobject.getString("Hora_Inicio"));
+                result.setHora_Fin(jsonobject.getString("Hora_Fin"));
+                listado.add(result);
+            }
+
         } catch (Exception e)
         {
-            result = "";
+            Log.v(TAG, e.getMessage().toString());
+            result = null;
 
         }
-        return result;
-    }*/
+        return listado;
+    }
 }

@@ -121,7 +121,9 @@ public class Docente extends AppCompatActivity {
                 break;
             case R.id.home:
                 fragmentClass = InicioFragment.class;
-
+                break;
+            case R.id.horario:
+                fragmentClass = Docente_Horario.class;
                 break;
             default:
                 fragmentClass = InicioFragment.class;

@@ -45,9 +45,6 @@ import principal.android.utp.proyecto.dao.UsuarioDAO;
 public class Alumno_Cursos extends Fragment {
 
     ListView lv;
-    private DrawerLayout drawerLayout;
-    private Toolbar toolbarD;
-    String nombre_curso;
     ArrayAdapter<String> adaptador;
     ArrayList<AlumnoCursoBean> listado;
     ArrayList<String> listado_cursos;
@@ -67,23 +64,17 @@ public class Alumno_Cursos extends Fragment {
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
 
                 Bundle args = new Bundle();
-                args.putString("nomcurso",  listado.get(position).getNombre_Curso());
+                args.putString("cod_curso",  listado.get(position).getCodigo());
+                args.putString("nom_curso",  listado.get(position).getNombre_Curso());
 
-                Alumno_Detalle fragment2 = new Alumno_Detalle();
+                Alumno_Notas fragment2 = new Alumno_Notas();
                 fragment2.setArguments(args);
 
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(android.R.id.content, fragment2);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_ENTER_MASK);
-                fragmentTransaction.commit();
-               /* FragmentManager childFragMan = getChildFragmentManager();
-
-                FragmentTransaction childFragTrans = childFragMan.beginTransaction();
-                childFragTrans.add(android.R.id.content, fragment2);
-                childFragTrans.addToBackStack("B");
-                childFragTrans.commit();*/
+                FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.alumno_cursosframe, fragment2);
+                ft.addToBackStack(null);
+                ft.commit();
 
             }
         });
@@ -97,7 +88,7 @@ public class Alumno_Cursos extends Fragment {
     }
 
 
-    // Listar Cursos del Docente ////////////////////////////////////////////////////////////////////
+    // Listar Cursos  ////////////////////////////////////////////////////////////////////
 
     class asyncMostrarCursosAlumno extends AsyncTask<String,Void,Void>
     {

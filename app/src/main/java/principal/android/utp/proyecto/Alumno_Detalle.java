@@ -32,8 +32,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import principal.android.utp.proyecto.bean.Alumno.Alumno_SeccionBean;
 import principal.android.utp.proyecto.bean.Docente.DocenteCursoBean;
@@ -50,14 +60,17 @@ import principal.android.utp.proyecto.dao.Docente.DocenteSeccionAlumnosDAO;
 public class Alumno_Detalle extends Fragment{
     ListView lv_NOTAS;
     String lista;
-    ArrayAdapter<String> adaptador;
-    ArrayList<String> listado_notas;
+    ArrayAdapter<String> adaptador,adaptador2;
+    ArrayList<String> listado_notas,listado_notas2;
     String cod_curso,cod_alumno;
-    ArrayList<Alumno_SeccionBean> listado;
+    ArrayList<Alumno_SeccionBean> listado,listado2;
     ArrayList<String> listado_alumnos;
-    Alumno_SeccionBean objAlumno_seccionBean;
+    Alumno_SeccionBean objAlumno_seccionBean,objAlumno_seccionBean2;
     DocenteCursoSeccionBean objDocenteCursoSeccionBean;
-    AlumnoDAO objAlumnoDAO;
+    AlumnoDAO objAlumnoDAO,objAlumnoDAO2 ;
+    Dialog dialog;
+    EditText nota;
+    String C1,C2,C3,C4;
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -75,63 +88,51 @@ public class Alumno_Detalle extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, final int position, long arg) {
 
-                Dialog dialog = new Dialog(getActivity());
+                dialog = new Dialog(getActivity());
                 dialog.setTitle("Bimestre" + (position + 1));
                 dialog.setContentView(R.layout.modal_nota);
                 dialog.show();
 
-                String n;
-                final EditText nota = (EditText)dialog.findViewById(R.id.nota_update);
-                if(getArguments().getString("nota"+(position+1)) == "null"){
-                    n = "";
-                }else{
-                    n = getArguments().getString("nota"+(position+1));
-                }
-                nota.setText(n);
+                 nota = (EditText)dialog.findViewById(R.id.nota_update);
+
+                if(position == 0) nota.setText(C1);else if(position == 1) nota.setText(C2);
+                else if(position == 2) nota.setText(C3);else if(position == 3) nota.setText(C4);
 
                 Button btnActualizar = (Button)dialog.findViewById(R.id.btn_actualizar);
                 btnActualizar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Boolean rpt;
                         String cod_docente,n1="",n2="",n3="",n4="";
-                         if(position+1 == 1){
-                             n1 = nota.getText().toString();
-                             n2 = (getArguments().getString("nota2"));
-                             n3 = (getArguments().getString("nota3"));
-                             n4 = (getArguments().getString("nota4"));
-                         }
-                         else if(position+1 == 2){
-                             n2 = nota.getText().toString();
-                             n1 = (getArguments().getString("nota1"));
-                             n3 = (getArguments().getString("nota3"));
-                             n4 = (getArguments().getString("nota4"));
-                         }
-                         else if(position+1 == 3){
-                             n3 = nota.getText().toString();
-                             n2 = (getArguments().getString("nota2"));
-                             n4 = (getArguments().getString("nota4"));
-                             n1 = (getArguments().getString("nota1"));
-                         }
-                         else if(position+1 == 4){
-                             n4 = nota.getText().toString();
-                             n3 = (getArguments().getString("nota3"));
-                             n1 = (getArguments().getString("nota4"));
-                             n2 = (getArguments().getString("nota2"));
-                         }
+                        if(position+1 == 1){
+                            n1 = nota.getText().toString();
+                            n2 = C2;
+                            n3 = C3;
+                            n4 = C4;
+
+                        }
+                        else if(position+1 == 2){
+                            n2 = nota.getText().toString();
+                            n1 = C1;
+                            n3 = C3;
+                            n4 = C4;
+                        }
+                        else if(position+1 == 3){
+                            n3 = nota.getText().toString();
+                            n2 = C2;
+                            n4 = C4;
+                            n1 = C1;
+                        }
+                        else if(position+1 == 4){
+                            n4 = nota.getText().toString();
+                            n3 = C3;
+                            n1 = C1;
+                            n2 = C2;
+                        }
 
                         cod_docente = ((ApplicationApp) getActivity().getApplication() ).getCodigo();
-
-                        ActualizarNotaDAO objActualizarNotaDAO = new ActualizarNotaDAO();
-                        rpt = objActualizarNotaDAO.EditarNota(cod_curso,cod_alumno,cod_docente,n1,n2,n3,n4);
-                        if(rpt){ Listar.execute(); }
+                        ActualizarNota(cod_curso,cod_alumno,cod_docente,n1,n2,n3,n4);
                     }
                 });
-
-
-
-
-
             }
         });
 
@@ -180,10 +181,10 @@ public class Alumno_Detalle extends Fragment{
             listado_notas.add(0,"BIMESTE 2     " + nota2);
             listado_notas.add(0,"BIMESTE 1     " + nota1);
 
+            C1 = nota1; C2 = nota2 ; C3 = nota3 ; C4 = nota4;
 
         }catch (Exception e){
             e.getMessage();
-            Log.d("resultadoF", "AUN FALTA!!!!!!!!" + listado);
         }
             return null;
         }
@@ -201,64 +202,54 @@ public class Alumno_Detalle extends Fragment{
     }
 
 
+    private void ActualizarNota(String cod_curso, String cod_alumno, String cod_docente, String n1, String n2, String n3, String n4) {
 
-    //Actualizar Nota del Alumno - Docente ////////////////////////////////////////////////////////////////////
-
-    class asyncActualizarNota extends AsyncTask<String,Void,Void>
-    {
-        private ProgressDialog progressDialog;
-
-        protected void onPreExecute(){
-
-        }
-
-        @Override
-        protected Void doInBackground(String... params) {
-            try {
-
-                objAlumno_seccionBean = new Alumno_SeccionBean();
-                objAlumno_seccionBean.setCodigo_Alumno(cod_alumno);
-                objAlumno_seccionBean.setCodigo_Curso(cod_curso);
-
-                listado = new ArrayList<Alumno_SeccionBean>();
-                objAlumnoDAO = new AlumnoDAO();
-                listado = objAlumnoDAO.NotasAlumno(objAlumno_seccionBean);
-
-                String nota1,nota2,nota3,nota4;
-                listado_notas = new ArrayList<String>();
-                nota1 = listado.get(0).getNota_I();
-                nota2 = listado.get(0).getNota_II();
-                nota3 = listado.get(0).getNota_III();
-                nota4 = listado.get(0).getNota_IV();
-
-                if(nota1 == null) nota1 = "" ;
-                if(nota2 == null) nota2 = "";
-                if(nota3.equals("null")) nota3 = "";
-                if(nota4.equals("null")) nota4 = "";
-
-                listado_notas.add(0,"BIMESTE 4     " + nota4);
-                listado_notas.add(0,"BIMESTE 3     " + nota3);
-                listado_notas.add(0,"BIMESTE 2     " + nota2);
-                listado_notas.add(0,"BIMESTE 1     " + nota1);
+        final String codCurso = cod_curso;
+        final String codAlumno = cod_alumno;
+        final String codDocente = cod_docente;
+        final String N1 = n1; final String N2 = n2; final String N3 = n3; final String N4 = n4;
 
 
-            }catch (Exception e){
-                e.getMessage();
-                Log.d("resultadoF", "AUN FALTA!!!!!!!!" + listado);
+        final String LOGIN_URL = "http://192.241.166.108/sistemacolegio/index.php/teacher/notaController/editarNota";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN_URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(response.trim().equals("success")){
+                            final Alumno_Detalle.asyncMostrarNotaAlumno Listar = new Alumno_Detalle.asyncMostrarNotaAlumno();
+                            Listar.execute();
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(),"Nota Actualizada",Toast.LENGTH_LONG).show();
+                            nota.setText("");
+
+                        }else{
+                            Toast.makeText(getActivity(),response,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_LONG ).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String,String>();
+                map.put("COD_CURSO",codCurso);
+                map.put("COD_DOCENTE",codDocente);
+                map.put("COD_ALUMNO",codAlumno);
+                map.put("N1",N1);
+                map.put("N2",N2);
+                map.put("N3",N3);
+                map.put("N4",N4);
+                return map;
             }
-            return null;
-        }
+        };
 
-
-        public void onPostExecute(Void result)
-        {
-            if (!listado.isEmpty())
-            {
-                Log.d("resultado", "YA ESTA!!!!!!!!" + listado);
-                adaptador = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listado_notas);
-                lv_NOTAS.setAdapter(adaptador);
-            }
-        }
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        requestQueue.add(stringRequest);
     }
 
 }

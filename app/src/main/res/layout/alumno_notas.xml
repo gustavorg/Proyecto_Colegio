@@ -1,53 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorAccent">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="177dp"
-        app:srcCompat="@drawable/alumno"
-        android:id="@+id/imageView4"
-        android:background="@color/colorPrimaryDark" />
-
-    <TextView
-        android:text="Matemáticas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView9"
-        android:textSize="24sp"
-        android:layout_below="@+id/imageView4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="34dp"
-        android:textColor="@color/colorLetraButton" />
-
-    <TextView
-        android:text="Matemáticas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView10"
-        android:textSize="24sp"
-        android:layout_below="@+id/imageView4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="34dp"
-        android:textColor="@color/colorLetraButton" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/Matematicas"
-        android:scrollbars="horizontal|vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/textView9"
-        android:layout_alignStart="@+id/textView9"
-        android:layout_marginLeft="88dp"
-        android:layout_marginStart="88dp"
-        android:layout_marginBottom="7dp"
-        android:layout_below="@+id/textView9" />
-
-
-</RelativeLayout>
+    android:layout_height="match_parent"
+    tools:context=".Alumno_Cursos"
+    android:id="@+id/alumno_notasframe">
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_alumno_notas" />
+</FrameLayout>
